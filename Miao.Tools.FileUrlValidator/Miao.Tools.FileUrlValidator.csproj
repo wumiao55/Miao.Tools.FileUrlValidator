@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageReleaseNotes>文件url验证,可设置验证文件类型,文件大小,使用如下:
+new CommonFileUrlValidator().ValidateAsync(fileUrl);</PackageReleaseNotes>
+    <Description>文件url验证, 可设置验证文件类型,文件大小,使用如下:
+new CommonFileUrlValidator().ValidateAsync(url)</Description>
+  </PropertyGroup>
+
+</Project>
