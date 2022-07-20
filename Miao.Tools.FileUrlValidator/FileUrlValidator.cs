@@ -14,7 +14,7 @@ namespace Miao.Tools.FileUrlValidator
         /// 获取允许的文件后缀名
         /// </summary>
         /// <returns></returns>
-        protected List<string> GetAllowFileExtensions()
+        public List<string> GetAllowFileExtensions()
         {
             var result = new List<string>();
             result.AddRange(this.AllowTextFileExtensions);
@@ -147,7 +147,7 @@ namespace Miao.Tools.FileUrlValidator
         {
             if (string.IsNullOrEmpty(fileUrl))
             {
-                throw new ArgumentException("file url is null or empty", nameof(fileUrl));
+                throw new ArgumentException("the file url is null or empty", nameof(fileUrl));
             }
             List<string> errorMessages = new List<string>();
             //是否验证文件扩展名
@@ -239,7 +239,7 @@ namespace Miao.Tools.FileUrlValidator
                 //判断文件是否存在
                 if (httpResponse.StatusCode == HttpStatusCode.NotFound)
                 {
-                    errorMessages.Add("file url is not found (404)");
+                    errorMessages.Add("the file url is not found (404)");
                 }
                 //判断文件大小
                 else if (httpResponse.StatusCode == HttpStatusCode.OK)
@@ -251,12 +251,12 @@ namespace Miao.Tools.FileUrlValidator
                     }
                     else if (contentLength > MaxFileSize)
                     {
-                        errorMessages.Add($"the file is too large: {contentLength} bytes");
+                        errorMessages.Add($"the file({contentLength} bytes) is too large");
                     }
                 }
                 else
                 {
-                    errorMessages.Add($"the file status code is abnormal: {httpResponse.StatusCode}");
+                    errorMessages.Add($"the file status code({httpResponse.StatusCode}) is abnormal");
                 }
             }
             catch (Exception ex)
@@ -280,11 +280,11 @@ namespace Miao.Tools.FileUrlValidator
             fileExtensions = fileExtensions.Split('?')[0];
             if (string.IsNullOrEmpty(fileExtensions))
             {
-                errorMessages.Add("unknown file extension");
+                errorMessages.Add("the file extension is unknown");
             }
             else if (!allowFileExtensions.Contains(fileExtensions))
             {
-                errorMessages.Add($"not allowed file extension: '{fileExtensions}'");
+                errorMessages.Add($"the file extension '{fileExtensions}' is not allowed");
             }
             return await Task.FromResult(errorMessages);
         }
